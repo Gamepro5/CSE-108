@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link href="/const.css" rel="stylesheet">
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+		<meta property="og:site_name" content="gamepro5.com"/>
+		<meta name="theme-color" content="#ff0000">
+		<meta property="og:image" content="https://gamepro5.com/images/gamepro5_trans_1080p.png"/>
+		<meta name="description" content="Basic calculator app for a class."/>
+		<title>Gamepro5 - Programs</title>
+		<script src="/localStorageSystem.js"></script><script src="/js/analytics.js"></script>
+	</head>
+
+<body class="js-error"><div id="nav-icon3"><span></span><span></span><span></span><span></span></div>
+
+<style>
+    .calculator-wrapper{
+        background-color: grey;
+        width: 225px;
+        padding: 10px;
+    }
+    .calc-display {
+        background: white;
+        width: 225px;
+        height: 25px;
+    }
+</style>
+
+<div class="main">
+	<div class="sidebar"><div class="js_error"><b>ERROR:</b> The quick links require JavaScript to load and function.</div></div>
+		<div class="wrapper">
+			<div class="header"><div class="js_error"><b>ERROR:</b> The navigation buttons and header require JavaScript to load and function.</div></div><div class="site_title"></div>
+				<div class="content">
+					<div class="calculator-wrapper">
+                        <div id="calc-display" class="calc-display"></div>
+                         <a id="1" class="button"><span>1</span></a> <a id="2" class="button"><span>2</span></a> <a id="3" class="button"><span>3</span></a> <a id="/" class="button"><span style="background-color: rgb(0, 255, 0);">/</span></a>
+                         <a id="4" class="button"><span>4</span></a> <a id="5" class="button"><span>5</span></a> <a id="6" class="button"><span>6</span></a> <a id="*" class="button"><span style="text-transform: none !important;background-color: rgb(0, 255, 0);">x</span></a>
+                         <a id="7" class="button"><span>7</span></a> <a id="8" class="button"><span>8</span></a> <a id="9" class="button"><span>9</span></a> <a id="-" class="button"><span style="background-color: rgb(0, 255, 0);">-</span></a>
+                         <a id="0" class="button"><span>0</span></a> <a id="." class="button"><span>.</span></a> <a id="=" class="button"><span style="background-color: rgb(0, 255, 0);">=</span></a> <a id="+" class="button"><span style="background-color: rgb(0, 255, 0);">+</span></a>
+
+                         <a id="clear" class="button"><span style="background-color: rgb(0, 132, 255);">clear</span></a>
+                    </div>
+		</div>
+	</div>
+</div>
+
+<script src="/const.js">
+</script>
+
+<script src="/js/accordion.js">
+</script>
+
+<script src="./calc.js">
+</script>
+
+<noscript><div class="javascript-disabled-error"><div><h1>Warning.</h1> <p>This website requires JavaScript in order to function. Either your browser is too old to support JavaScript, or you've manually disabled it for some ungodly reason. If you've just re-enabled JavaScript, please reload this page.</p></div></div></noscript>
+</body>
+</html>
