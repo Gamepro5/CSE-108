@@ -1,0 +1,125 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.calculator-wrapper{
+  background-color: grey;
+  width: 225px;
+  padding: 10px;
+}
+.calc-display {
+  background: white;
+  width: 225px;
+  height: 25px;
+}
+/*BUTTONS CODE  FINALLY UPDATED JULY 2021*/
+.button {
+  background: none;
+  display: inline-flex;
+  margin: 5px 0 0;
+  padding: 0;
+  transition: all 0.2s;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  border-radius: 5px;
+  border: none;
+  text-indent: 0;
+  position: relative;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.button span {
+  text-indent: 0;
+  display: inline-block !important;
+  vertical-align: top;
+  font-size: 22px;
+  color: black !important;
+  text-decoration: none;
+  font-family: inherit;
+  background-color: red;
+  border-radius: calc(5em/22);
+  padding: calc(8em/22) calc(18em/22);
+  text-transform: uppercase;
+  transition: all 0.2s;
+  line-height: 1;
+  cursor: pointer;
+  border: black;
+  border-style: solid;
+  border-width: calc(2em/22);
+  outline: none;
+  -webkit-appearance: none;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.button.inactive {
+  transition: none;
+  transform: scale(0.9);
+  cursor: not-allowed;
+  z-index: 0;
+}
+
+.button.inactive:hover, .button.inactive:active {
+  transform: scale(0.9);
+}
+
+.button.inactive span {
+  transition: none;
+  transform: scale(1);
+  background-color: #980000;
+  cursor: not-allowed;
+  z-index: 0;
+}
+
+.button.inactive:hover span {
+  transform: scale(1);
+}
+
+.button.inactive:active span {
+  transform: scale(1);
+}
+
+.button:hover, .button:active, .button.dropbtn.down {
+  transition: transform 0.5s cubic-bezier(0.68, 0.67, 0.25, 2.04), background-color 0.1s cubic-bezier(0.4, 0, 1, 1);
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+.button:hover span {
+  transition: transform 0.5s cubic-bezier(0.68, 0.67, 0.25, 2.04), background-color 0.1s cubic-bezier(0.4, 0, 1, 1);
+}
+
+.button:active span, .button.dropbtn.down span {
+  transition: transform 0.1s cubic-bezier(0.4, 0, 1, 1), background-color 0.1s cubic-bezier(0.4, 0, 1, 1);
+  transform: scale(0.8);
+  background-color: #980000;
+}
+
+.button.toggle.true span {
+  background-color: #008000;
+}
+
+.button.toggle.false span {
+  background-color: #980000;
+}
+
+.button.toggle.true:active span {
+  background-color: #004c00;
+}
+
+.button.toggle.false:active span {
+  background-color: #610000;
+}
