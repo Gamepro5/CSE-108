@@ -1,21 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 function CalcOp(props) {
   return (
-    <a className="button" onClick={() => props.operator_entered(props.operation)}><span>{props.operation}</span></a>
+    <Button variant="contained" onClick={() => props.operator_entered(props.operation)}>{props.operation}</Button>
   );
 }
 
 function CalcNum(props) {
   return (
-    <a className="button" onClick={() => props.number_entered(props.number)}><span>{props.number}</span></a>
+    <Button variant="contained" onClick={() => props.number_entered(props.number)}>{props.number}</Button>
   );
 }
 
 let previous_operation = ""
 let latest_number = ""
+let equalJustPressed = false
 
 let accept_num = true
 let accept_operator = false
@@ -34,6 +37,7 @@ function num_enter() {
   accept_operator = true
   accept_num = true
   accept_submit = true
+  equalJustPressed = false
 }
 
 function number_entered(num) {
@@ -50,11 +54,13 @@ function op_enter() {
   accept_num = true
   accept_submit = false;
   decimal_used = false;
+  equalJustPressed = false;
 }
 
 function operator_entered(operation) {
     setDisplay(display + operation);
     latest_number = "";
+    previous_operation = operation
     op_enter()
 }
 
@@ -64,6 +70,7 @@ function dec_enter() {
   accept_num = true
   decimal_used = true;
   accept_submit = false;
+  equalJustPressed = false
 }
 
 function decimal_entered() {
@@ -75,15 +82,16 @@ function decimal_entered() {
   }
 }
 function equalEnetered() {
+  console.log(previous_operation, latest_number)
   if (accept_submit) {
-    if (latest_number != "") {
-      setDisplay(eval(display+latest_number));
-      console.log("HI")
+    if (equalJustPressed) {
+      setDisplay(eval(display+previous_operation+latest_number));
       num_enter()
     } else {
       setDisplay(eval(display));
       num_enter()
     }
+    equalJustPressed = true;
   }
 }
 function clearEntered() {
@@ -98,7 +106,8 @@ function clearEntered() {
   return (
     <header>
       <div className="calculator-wrapper">
-      <div className="calc-display">{display}</div>
+      <TextField id="outlined-basic" label="Calculator" variant="outlined" value={display} />
+      
         <CalcNum  number_entered={number_entered} number="1"/>
         <CalcNum number_entered={number_entered} number="2"/>
         <CalcNum number_entered={number_entered} number="3"/>
@@ -116,11 +125,11 @@ function clearEntered() {
 
         
         <CalcNum number_entered={number_entered} number="0"/>
-        <a className="button" onClick={() => decimal_entered()}><span>.</span></a>
-        <a className="button" onClick={() => equalEnetered()}><span>=</span></a>
+        <Button variant="contained" onClick={() => decimal_entered()}>.</Button>
+        <Button variant="contained" onClick={() => equalEnetered()}>=</Button>
         <CalcOp operator_entered={operator_entered} operation="+"/>
 
-        <a className="button" onClick={() => clearEntered()}><span>CLEAR</span></a>
+        <Button variant="contained" onClick={() => clearEntered()}>CLEAR</Button>
       </div>
     </header>
   );
