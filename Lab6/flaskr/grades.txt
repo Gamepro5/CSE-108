@@ -1,0 +1,1 @@
+{"John Smith": "5", "Jose Rodriguez": 91.2, "Susan Miller": 87.9}
