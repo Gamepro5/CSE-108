@@ -4,24 +4,18 @@ import json
 from flask import Flask,jsonify,request,abort
 from flask_cors import CORS, cross_origin
 
-from sqlalchemy import create_engine, MetaData, Table
+from flask_sqlalchemy import SQLAlchemy
+app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+db = SQLAlchemy(app)
+class Grades(db.Model):
+    name = db.Column(db.String, primary_key=True)
+    grade = db.Column(db.Numeric)
 
-engine = create_engine('sqlite:////database.db')
-metadata = MetaData(bind=engine)
 
 
-grades = {}
 
-def saveGrades():
-    f = open('./flaskr/grades.txt', "w")
-    f.write(json.dumps(grades))
-    f.close()
-
-def loadGrades():
-    global grades
-    f = open('./flaskr/grades.txt', "r")
-    grades = json.load(f)
-    f.close()
+db.create_all()
 
   
 app =   Flask(__name__) 
@@ -33,41 +27,36 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def gradesFromNothing(): 
 
     if(request.method == 'GET'):
-        loadGrades()
-        return jsonify(grades) 
+        return jsonify(Grades.query.all())
     elif (request.method == 'POST'):
-        print("FUCK2")
         data = json.loads(request.data)
-        if data['name'] in grades:
+        if Grades.query.filter_by(name=data['name']).first() is None:
             return abort(500)
         else:
-            print("FUCKFUCK")
-            grades.update({data['name'] : data['grade']})
-           # grades[data['name']] = data['grade']
-            saveGrades()
+            db.session.add(Grades(name=data['name'], email=data['grade']))
+            db.session.commit()
             return jsonify(success=True)
     
 @app.route('/grades/<name>', methods = ['GET', 'PUT', 'DELETE']) 
 @cross_origin()
-def gradeFromName(name): 
+def gradeFromName(_name): 
     if(request.method == 'GET'):
-        loadGrades()
-        if name in grades:
-            output = {
-                name: grades[name]
-            }
-            return jsonify(output) 
+        
+        person = Grades.query.filter_by(name=data['name']).first()
+        if person is not None:
+            return jsonify(person) 
         return abort(404)
     elif (request.method == 'PUT'):
-        if name in grades:
-            data = json.loads(request.data)
-            grades[name] = data['grade']
-            saveGrades()
+        data = json.loads(request.data)
+        person = Grades.query.filter_by(name=_name).first()
+        if person is not None:
+            person.grade = data['grade']
+            db.session.commit()
             resp = jsonify(success=True)
             return resp
     elif (request.method == 'DELETE'):
-        if name in grades:
-            del grades[name]
-            saveGrades()
+        if Grades.query.filter_by(name=_name).first() is not None:
+            Grades.query.filter_by(name=_name).delete()
             resp = jsonify(success=True)
             return resp
+        return abort(404)
