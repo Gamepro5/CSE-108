@@ -1,0 +1,8 @@
+# start chrome by running this command:
+
+chrome.exe --disable-web-security --user-data-dir=c:\my-chrome-data\data
+
+
+# START flask
+.venv\Scripts\activate
+flask --app flaskr run
